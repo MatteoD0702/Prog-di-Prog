@@ -3,35 +3,28 @@
 
 #include <iostream>
 
+class Desease {
+  double m_infectivity;  // percentuale che ogni infetto ha di infettare un
+                         // vicino (0-->1)
+  double m_deadliness;       // percentuale che un malato diventi morto (1-->4)
+  double m_heal_percentage;  // percentuale di guarire (1-->2)
+  int m_immunity_period;     // tempo di immunità post-guarigione (2-->0)
 
-class Desease{
+ public:
+  // funzione per inizializzare i dati di Deasease
+  void initVariables(double infectivity, double deadliness, double heal,
+                     int imm_period);
 
-    double infectivity;      //percentuale che ogni infetto ha di infettare un vicino (0-->1)
-    double deadliness;       //percentuale che un malato diventi morto (1-->4)
-    double heal_percentage;  //percentuale di guarire (1-->2)
-    int immunity_period;     //tempo di immunità post-guarigione (2-->0)
+  // funzioni dedicate al passaggio delle variabili double
+  int getPeriod() const;
 
+  double getInfect() const;
 
-    public: 
+  double getHeal() const;
 
-    //costruttore che usa 4 variabili per inizializzare la malattia
-
-    //funzione per inizializzare i dati di Deasease
-    void init_variables(double inf, double dead, double heal, int imm_p);
-
-    //funzioni dedicate al passaggio delle variabili double
-    int GetPeriod();
-
-    double GetInfect();
-
-    double GetHeal();
-
-    double GetDeadly();
-
+  double getDeadly() const;
 };
 
-// sistemare la formattazione (max 72/76 colonne)... poulation va cambiato(metodi inclusivi per togliere gli if nidificati) Population class: con person e desease come elementi 
 
-// metodi getter const e initvariables-> Setvariables, testcase, e altra roba
 
 #endif
