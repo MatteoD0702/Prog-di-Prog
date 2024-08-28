@@ -2,46 +2,47 @@
 #define PERSON_HPP
 
 #include <iostream>
+#include <random>
 
+class Person {
+  int m_state = 0; /* stato 0: sano , stato 1: infetto , stato 2: guarito ,
+             stato 3:vaccinato(alla fine non implementato) , stato 4: morto */
+  bool m_quarantine = 0;    // 1(true): in quarantena    0(false): libero
+  int m_immunity_time = 0;  // conto dei giorni di immunità post-guarigione
 
-class Person{
+ public:
+  // le varie funzioni per la modifica dei dati
+  void setState(int state);
+  void setQuarantine(bool quarantine);
+  void setImmunityTime(int immunity_time);
 
-    int state=0;          /* stato 0: sano , stato 1: infetto , stato 2: guarito , stato 3:vaccinato , stato 4: morto */
-    bool quarantine=0;    //1: in quarantena    0: libero
-    int immunity_time=0;  //conto dei giorni di immunità post-guarigione
+  // init viene usata per inizializare un'entità a partire dai dati in input
+  void initVariables(int state, bool quarantine, int immunity_time);
 
-    public:
+  // un overload di init_variables che permette di assegnare a una persona i
+  // valori di un'altra
+  void initVariables(const Person& old_person);
 
-    //le varie funzioni per la modifica dei dati
-    void SetState(int st);
-    void SetQuarantine(bool qrnt);
-    void SetImmu_Time(int imm_t);
+  // start deve inizializzare state in modo random (numero da 0 a 99 contro la
+  // percentuale)
+  void startRandomly(double starting_percentage);
 
-    //init viene usata per inizializare un'entità a partire dai dati in input
-    void init_variables(int st, bool qrnt, int imm_t);
+  // le varie funzioni per restituire i dati privati
+  int getState() const;
+  bool getQuarantine() const;
+  int getImmu_Time() const;
 
-    //un overload di init_variables che permette di assegnare a una persona i valori di un'altra
-    void init_variables(Person old_person);
+  // immunity_check confronta il tempo passato e quello impostato dall'utente
+  void checkImmunity(int time, int period);
 
-    //start deve inizializzare state in modo random
-    void start(double starting_percentage);
+  // destiny gestisce la morte o la guarigione di una cella malata
+  void checkDestiny(double dead, double heal, int period);
 
-    //le varie funzioni per restituire i dati private
-    int GetState();
-    bool GetQuarantine();
-    int GetImmu_Time();
-
-    // immunity_check confronta il tempo passato e quello impostato dall'utente
-    void immunity_check(int time, int period);
-
-    //destiny gestisce la morte o la guarigione di una cella malata
-    void destiny(double dead, double heal);
-
-    //infection prende in input una cella e le 8 celle attorno e verifica se la cella centrale si infetta
-    void infection(double infectivit);
-
+  // infect verifica se la cella centrale si infetta (viene richiamato se i
+  // vicini sono infetti)
+  void infect(double infectivity);
 };
 
-// modifica i dati in input di tutte le variabili anche nell'hpp se no nel cpp non vanno
+
 
 #endif

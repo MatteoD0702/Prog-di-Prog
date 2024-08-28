@@ -1,30 +1,17 @@
 #include "desease.hpp"
 
-
-void Desease::init_variables(double inf, double dead, double heal, int imm_p)
-{
-    infectivity= inf; 
-    deadliness= dead; 
-    heal_percentage= heal; 
-    immunity_period= imm_p;
+void Desease::initVariables(double infectivity, double deadliness, double heal,
+                            int imm_period) {
+  m_infectivity = infectivity;
+  m_deadliness = deadliness;
+  m_heal_percentage = heal;
+  m_immunity_period = imm_period;
 }
 
-int Desease::GetPeriod()
-{
-    return immunity_period;
-}
+int Desease::getPeriod() const { return m_immunity_period; }
 
-double Desease::GetInfect()
-{
-    return infectivity;
-}
+double Desease::getInfect() const { return m_infectivity; }
 
-double Desease::GetHeal()
-{
-    return heal_percentage;
-}
+double Desease::getHeal() const { return m_heal_percentage; }
 
-double Desease::GetDeadly()
-{
-    return deadliness;
-}
+double Desease::getDeadly() const { return m_deadliness; }
